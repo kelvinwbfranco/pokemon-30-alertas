@@ -1,0 +1,49 @@
+name: Monitor Pokémon 30 anos
+on:
+  schedule:
+    - cron: '2-59/5 * * * *' # Cada 5 minutos (UTC); pode haver atraso
+  workflow_dispatch:
+    inputs:
+      test_telegram:
+        description: 'Enviar mensagem de teste ao Telegram'
+        required: false
+        type: boolean
+        default: false
+permissions:
+  contents: write
+concurrency:
+  group: pokemon30-monitor
+  cancel-in-progress: false
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - name: Verificar ofertas / testar Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TEST_TELEGRAM: ${{ inputs.test_telegram }}
+        run: |
+          if [ "$TEST_TELEGRAM" = "true" ]; then
+            python monitor.py --test-telegram
+          else
+            python monitor.py
+          fi
+      - name: Guardar histórico de alertas sem repetir
+        if: success()
+        run: |
+          if ! git diff --quiet -- state.json; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add state.json
+            git commit -m 'Atualizar último preço alertado'
+            git push
+          fi

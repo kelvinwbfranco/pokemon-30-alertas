@@ -1,0 +1,32 @@
+{
+  "thresholds_brl": {
+    "etb": 470.00,
+    "fichario": 230.00,
+    "poster": 110.00,
+    "mew": 250.00,
+    "mewtwo": 250.00,
+    "ditto": 340.00,
+    "blister_duplo": 69.99,
+    "blister_triplo": 99.99,
+    "sylveon": 169.99,
+    "greninja": 169.99,
+    "combo_6": 199.99,
+    "espeon": 115.99,
+    "umbreon": 115.99,
+    "minilata": 77.99,
+    "dia": 599.99,
+    "noite": 599.99
+  },
+  "stores": [
+    {"name": "Mercado Livre", "domain": "mercadolivre.com.br", "marketplace": true, "search_url": "https://lista.mercadolivre.com.br/pokemon-celebracao-30-anos"},
+    {"name": "Amazon Brasil", "domain": "amazon.com.br", "marketplace": true, "search_url": "https://www.amazon.com.br/s?k=pokemon+celebracao+30+anos"},
+    {"name": "Magalu", "domain": "magazineluiza.com.br", "marketplace": true, "search_url": "https://www.magazineluiza.com.br/busca/pokemon-celebracao-30-anos/"},
+    {"name": "Toy Mania", "domain": "toymania.com.br", "marketplace": false, "search_url": "https://www.toymania.com.br/busca?q=pokemon+30+anos"},
+    {"name": "Ri Happy", "domain": "rihappy.com.br", "marketplace": false, "search_url": "https://www.rihappy.com.br/busca?q=pokemon+30+anos"}
+  ],
+  "trusted_marketplace_sellers": [
+    "amazon", "amazon.com.br", "magazine luiza", "magalu", "copag", "ri happy", "rihappy", "toy mania", "toymania"
+  ],
+  "watched_product_urls": [],
+  "max_listings_per_store": 12
+}
